@@ -6,31 +6,59 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-    <% if user_signed_in? %>
-      <li>
-        <%= link_to '投稿フォーム', books_path %>
-      </li>
-      <li>
-      <%= link_to 'マイページ', user_path(current_user.id) %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
-  </header>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <% if user_signed_in? %>
+        <a class="navbar-brand">
+          <%= link_to 'Bookers', root_path, class:"nav-link text-light" %>
+        </a>
+        <div class="navbar-collapse collapse show" id="navbarNavDropdown" style>
+
+          <ul class="navbar-nav ml-auto">
+            <li>
+              <%= link_to "Home", user_path(current_user.id), class:"nav-link text-light" %>
+            </li>
+            <li>
+              <%= link_to 'Books', books_path, class:"nav-link text-light"%>
+            </li>
+            <li>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"nav-link text-light" %>
+            </li>
+          </ul>
+        </div>
+        <% else %>
+         <a class="navbar-brand">
+            <%= link_to 'Bookers', root_path, class:"nav-link text-light" %>
+         </a>
+         <div class="navbar-collapse collapse show" id="navbarNavDropdown" style>
+           <ul class="navbar-nav ml-auto">
+            <li>
+              <%= link_to "新規登録", new_user_registration_path, class:"nav-link text-light" %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class:"nav-link text-light"%>
+            </li>
+        <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </header>
+    <main><%= yield %></main>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
