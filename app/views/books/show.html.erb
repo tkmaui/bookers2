@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="form-group">
-          <%= f.submit 'Creat Book', class:"btn btn-success" %>
+          <%= f.submit 'Create Book', class:"btn btn-success" %>
         </div>
         <% end %>
     </div>
@@ -55,7 +55,9 @@
         <tbody>
           <tr>
             <td>
+              <%= link_to user_path(@user.id) do %>
               <%= image_tag @user.get_profile_image(100,100) %>
+              <% end %>
               <br>
               <%= link_to user_path(@user.id) do %>
                 <%= @user.name %>
